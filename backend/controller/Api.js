@@ -17,7 +17,7 @@ const tradeAlarm = async (req, res) => {
       // BuyTimes: buyArray,
     };
 
-    content = content.replace(/ nextLine /g, "\n");
+    //content = content.replace(/ nextLine /g, "\n");
     console.log(content);
 
     const currencyRegex = /[Oo]perating\s* [Cc]urrency\s*:\s*[A-Z]{2,5}/gi;
