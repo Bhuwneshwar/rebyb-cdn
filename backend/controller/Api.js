@@ -142,6 +142,7 @@ const tradeAlarm = async (req, res) => {
     console.log(e);
     return res.send({
       success: false,
+      error:e
     });
   }
 };
