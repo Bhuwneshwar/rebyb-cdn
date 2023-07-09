@@ -1,0 +1,18 @@
+{
+  "name": "rebyb-cdn",
+  "version": "1.0.0",
+  "description": "cdn around",
+  "main": "backend/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/index.js",
+    "dev": "nodemon backend/index.js"
+  },
+  "keywords": ["rebyb", "cdn"],
+  "author": "Bhuwneshwar Mandal",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  }
+}
