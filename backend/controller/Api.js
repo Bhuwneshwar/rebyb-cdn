@@ -17,7 +17,7 @@ const tradeAlarm = async (req, res) => {
       // BuyTimes: buyArray,
     };
 
-    //content = content.replace(/ nextLine /g, "\n");
+    content = content.replace(/ nextLine /g, "\n");
     console.log(content);
 
     const currencyRegex = /[Oo]perating\s* [Cc]urrency\s*:\s*[A-Z]{2,5}/gi;
@@ -142,7 +142,7 @@ const tradeAlarm = async (req, res) => {
     console.log(e);
     return res.send({
       success: false,
-      error:e
+      error:JSON.stringify(e)
     });
   }
 };
