@@ -9,12 +9,6 @@ const tradeAlarm = async (req, res) => {
       success: false,
       tradeLength: 0,
       trades: [],
-
-      //SellDueTimes: SellTimes,
-      //BuyDueTimes: BuyTimes,
-
-      // SellTimes: sellArray,
-      // BuyTimes: buyArray,
     };
 
     content = content.replace(/ nextLine /g, "\n");
@@ -23,7 +17,7 @@ const tradeAlarm = async (req, res) => {
     const currencyRegex = /[Oo]perating\s* [Cc]urrency\s*:\s*[A-Z]{2,5}/gi;
     const coinRegex = /[A-Z]{2,5}/g;
     const fullTimeRegex =
-      /([Bb]uy|[Ss]ell)\s* [Tt]ime\s*:?\s*:?\s*(\d{1,2}\s*:\s*\d{2}(\s*[APap][Mm])?)/gi;
+      /([Bb]uy|[Ss]ell)\s* ([Tt]ime)?\s*:?\s*:?\s*(\d{1,2}\s*:\s*\d{2}(\s*[APap][Mm])?)/gi;
     // const sellTimeRegex =/[Ss]ell\s? \s?\s?[Tt]ime\s?\s?\s?:?\s?\s?\s?:?\s?\s?\s?(\d{1,2}\s?\s?\s?:\s?\s?\s?\d{2}\s?\s?\s?[APap][Mm])/gi;
     //const onlyTimeRegex = /(\d{1,2}\s?\s?\s?:\s?\s?\s?\d{2}\s?\s?\s?[APap][Mm])/;
     const twoDigitRegex = /(\d+)\s*:\s*(\d+)/;
@@ -76,63 +70,85 @@ const tradeAlarm = async (req, res) => {
       if (miliDef > 0) {
         let secondDef = Math.floor(miliDef / 1000) - 65;
         console.log("secondDef", secondDef);
-        responses.success = true;
-
         return secondDef;
       }
-      responses.success = false;
       return false;
     };
+    if (!currency) return res.send({ success: false });
 
     if (currency[0]) {
       let coin = currency[0].match(coinRegex)[0];
+
+      var DueOne = generateDueTime(fullTime[0]);
+      var DueTwo = generateDueTime(fullTime[1]);
+      if (DueOne && DueTwo) {
+        responses.success = true;
+      } else responses.success = false;
 
       responses.trades.push({
         coin,
         id: 1,
         buyTime: fullTime[0],
         sellTime: fullTime[1],
-        BuyDueTime: generateDueTime(fullTime[0]),
-        SellDueTime: generateDueTime(fullTime[1]),
+        BuyDueTime: DueOne,
+        SellDueTime: DueTwo,
       });
     }
     if (currency[1]) {
       let coin = currency[1].match(coinRegex)[0];
       responses.tradeLength++;
 
+      var DueOne = generateDueTime(fullTime[2]);
+      var DueTwo = generateDueTime(fullTime[3]);
+      if (DueOne && DueTwo) {
+        responses.success = true;
+      } else responses.success = false;
+
       responses.trades.push({
         coin,
         id: 2,
         buyTime: fullTime[2],
         sellTime: fullTime[3],
-        BuyDueTime: generateDueTime(fullTime[2]),
-        SellDueTime: generateDueTime(fullTime[3]),
+        BuyDueTime: DueOne,
+        SellDueTime: DueTwo,
       });
     }
     if (currency[2]) {
       let coin = currency[2].match(coinRegex)[0];
       responses.tradeLength++;
 
+      var DueOne = generateDueTime(fullTime[4]);
+      var DueTwo = generateDueTime(fullTime[5]);
+      if (DueOne && DueTwo) {
+        responses.success = true;
+      } else responses.success = false;
+
       responses.trades.push({
         coin,
         id: 3,
         buyTime: fullTime[4],
         sellTime: fullTime[5],
-        BuyDueTime: generateDueTime(fullTime[4]),
-        SellDueTime: generateDueTime(fullTime[5]),
+        BuyDueTime: DueOne,
+        SellDueTime: DueTwo,
       });
     }
     if (currency[3]) {
       let coin = currency[3].match(coinRegex)[0];
       responses.tradeLength++;
 
+      var DueOne = generateDueTime(fullTime[6]);
+      var DueTwo = generateDueTime(fullTime[7]);
+      if (DueOne && DueTwo) {
+        responses.success = true;
+      } else responses.success = false;
+
       responses.trades.push({
         coin,
         id: 4,
         buyTime: fullTime[6],
         sellTime: fullTime[7],
-        BuyDueTime: generateDueTime(fullTime[6]),
-        SellDueTime: generateDueTime(fullTime[7]),
+        BuyDueTime: DueOne,
+        SellDueTime: DueTwo,
       });
     }
 
@@ -142,7 +158,6 @@ const tradeAlarm = async (req, res) => {
     console.log(e);
     return res.send({
       success: false,
-      error:JSON.stringify(e)
     });
   }
 };
