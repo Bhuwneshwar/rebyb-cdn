@@ -13,7 +13,9 @@ const tradeAlarm = async (req, res) => {
       tradeLength: 0,
       trades: [],
       T1: Date(),
-      T2: new Date().getTime() - now * 1000,
+      T2: new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Calcutta",
+      }),
     };
     content = content.replace(/ nextLine /g, "\n");
     console.log(content);
@@ -36,6 +38,12 @@ const tradeAlarm = async (req, res) => {
 
     const fullTime = content.match(fullTimeRegex);
     console.log("fullTime", fullTime);
+
+    const nDate = new Date().toLocaleString("en-US", {
+      timeZone: "Asia/Calcutta",
+    });
+
+     console.log(nDate);
 
     //const timeZone = "Asia/Kolkata";
     //const currentDate = moment.now(timeZone);
