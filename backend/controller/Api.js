@@ -67,7 +67,8 @@ const tradeAlarm = async (req, res) => {
         foundTime2.getMinutes() + timeZoneOffset + ISTOffset
       );
 
-      const foundTime = new Date(foundTime2);
+      console.log(foundTime2);
+      const foundTime = new Date(foundTime2.toString().replace("Z", ""));
 
       let timey =
         foundTime.getHours() +
@@ -78,6 +79,7 @@ const tradeAlarm = async (req, res) => {
 
       console.log("found date", foundTime);
       console.log("timey", timey);
+      responses.T2 = timey;
       const miliDef = foundTime.getTime() - now * 1000;
       console.log("miliDef", miliDef);
 
