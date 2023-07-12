@@ -12,8 +12,8 @@ const tradeAlarm = async (req, res) => {
       success: false,
       tradeLength: 0,
       trades: [],
-      T1:Date(), 
-      T2:new Date(), 
+      T1: Date(),
+      T2: new Date(),
     };
     content = content.replace(/ nextLine /g, "\n");
     console.log(content);
@@ -44,7 +44,9 @@ const tradeAlarm = async (req, res) => {
 
     date2.setMinutes(date2.getMinutes() + timeZoneOffset + ISTOffset);
 
-    console.log(date2); // भारतीय समय क्षेत्र के अनुसार अद्यतित समय और तारीख को प्रिंट करेगा
+  return  res.send( date2); // भारतीय समय क्षेत्र के अनुसार अद्यतित समय और तारीख को प्रिंट करेगा
+
+
 
     //const timeZone = "Asia/Kolkata";
     //const currentDate = moment.now(timeZone);
@@ -67,6 +69,9 @@ const tradeAlarm = async (req, res) => {
       const makedTime = `${hh}:${ss}:00 ${apm} ${dt}`;
 
       let foundTime = new Date(makedTime);
+      
+
+      
       let timey =
         foundTime.getHours() +
         ":" +
@@ -76,7 +81,6 @@ const tradeAlarm = async (req, res) => {
 
       console.log("found date", foundTime);
       console.log("timey", timey);
-
       const miliDef = foundTime.getTime() - now * 1000;
       console.log("miliDef", miliDef);
 
