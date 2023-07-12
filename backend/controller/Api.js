@@ -19,8 +19,8 @@ const tradeAlarm = async (req, res) => {
 
     const currencyRegex = /[Oo]perating\s* [Cc]urrency\s*:\s*[A-Z]{2,5}/gi;
     const coinRegex = /[A-Z]{2,5}/g;
-    const fullTimeRegex =
-      /([Bb]uy|[Ss]ell)\s* ([Tt]ime)?\s*:?\s*:?\s*(\d{1,2}\s*:\s*\d{2}(\s*[APap][Mm])?)/gi;
+    const fullTimeRegex =/\d{1,2}\s*:\s*\d{2}(\s*[APap][Mm])?/gi;
+    //const fullTimeRegex =/([Bb]uy|[Ss]ell)\s* ([Tt]ime)?\s*:?\s*:?\s*(\d{1,2}\s*:\s*\d{2}(\s*[APap][Mm])?)/gi;
     // const sellTimeRegex =/[Ss]ell\s? \s?\s?[Tt]ime\s?\s?\s?:?\s?\s?\s?:?\s?\s?\s?(\d{1,2}\s?\s?\s?:\s?\s?\s?\d{2}\s?\s?\s?[APap][Mm])/gi;
     //const onlyTimeRegex = /(\d{1,2}\s?\s?\s?:\s?\s?\s?\d{2}\s?\s?\s?[APap][Mm])/;
     const twoDigitRegex = /(\d+)\s*:\s*(\d+)/;
@@ -81,6 +81,7 @@ const tradeAlarm = async (req, res) => {
 
     if (currency[0]) {
       let coin = currency[0].match(coinRegex)[0];
+      responses.tradeLength++;
 
       var DueOne = generateDueTime(fullTime[0]);
       var DueTwo = generateDueTime(fullTime[1]);
