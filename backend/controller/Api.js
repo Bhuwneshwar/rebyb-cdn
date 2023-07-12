@@ -19,7 +19,7 @@ const tradeAlarm = async (req, res) => {
 
     const currencyRegex = /[Oo]perating\s* [Cc]urrency\s*:\s*[A-Z]{2,5}/gi;
     const coinRegex = /[A-Z]{2,5}/g;
-    const fullTimeRegex =/\d{1,2}\s*:\s*\d{2}(\s*[APap][Mm])?/gi;
+    const fullTimeRegex = /\d{1,2}\s*:\s*\d{2}(\s*[APap][Mm])?/gi;
     //const fullTimeRegex =/([Bb]uy|[Ss]ell)\s* ([Tt]ime)?\s*:?\s*:?\s*(\d{1,2}\s*:\s*\d{2}(\s*[APap][Mm])?)/gi;
     // const sellTimeRegex =/[Ss]ell\s? \s?\s?[Tt]ime\s?\s?\s?:?\s?\s?\s?:?\s?\s?\s?(\d{1,2}\s?\s?\s?:\s?\s?\s?\d{2}\s?\s?\s?[APap][Mm])/gi;
     //const onlyTimeRegex = /(\d{1,2}\s?\s?\s?:\s?\s?\s?\d{2}\s?\s?\s?[APap][Mm])/;
@@ -80,80 +80,76 @@ const tradeAlarm = async (req, res) => {
     if (!currency) return res.send({ success: false });
 
     if (currency[0]) {
-      let coin = currency[0].match(coinRegex)[0];
-      responses.tradeLength++;
-
       var DueOne = generateDueTime(fullTime[0]);
       var DueTwo = generateDueTime(fullTime[1]);
       if (DueOne && DueTwo) {
         responses.success = true;
-      } else responses.success = false;
+        let coin = currency[0].match(coinRegex)[0];
+        responses.tradeLength++;
 
-      responses.trades.push({
-        coin,
-        id: 1,
-        buyTime: fullTime[0],
-        sellTime: fullTime[1],
-        BuyDueTime: DueOne,
-        SellDueTime: DueTwo,
-      });
+        responses.trades.push({
+          coin,
+          id: 1,
+          buyTime: fullTime[0],
+          sellTime: fullTime[1],
+          BuyDueTime: DueOne,
+          SellDueTime: DueTwo,
+        });
+      } else responses.success = false;
     }
     if (currency[1]) {
-      let coin = currency[1].match(coinRegex)[0];
-      responses.tradeLength++;
-
       var DueOne = generateDueTime(fullTime[2]);
       var DueTwo = generateDueTime(fullTime[3]);
       if (DueOne && DueTwo) {
         responses.success = true;
-      } else responses.success = false;
+        let coin = currency[1].match(coinRegex)[0];
+        responses.tradeLength++;
 
-      responses.trades.push({
-        coin,
-        id: 2,
-        buyTime: fullTime[2],
-        sellTime: fullTime[3],
-        BuyDueTime: DueOne,
-        SellDueTime: DueTwo,
-      });
+        responses.trades.push({
+          coin,
+          id: 2,
+          buyTime: fullTime[2],
+          sellTime: fullTime[3],
+          BuyDueTime: DueOne,
+          SellDueTime: DueTwo,
+        });
+      } else responses.success = false;
     }
     if (currency[2]) {
-      let coin = currency[2].match(coinRegex)[0];
-      responses.tradeLength++;
-
       var DueOne = generateDueTime(fullTime[4]);
       var DueTwo = generateDueTime(fullTime[5]);
       if (DueOne && DueTwo) {
         responses.success = true;
-      } else responses.success = false;
+        let coin = currency[2].match(coinRegex)[0];
+        responses.tradeLength++;
 
-      responses.trades.push({
-        coin,
-        id: 3,
-        buyTime: fullTime[4],
-        sellTime: fullTime[5],
-        BuyDueTime: DueOne,
-        SellDueTime: DueTwo,
-      });
+        responses.trades.push({
+          coin,
+          id: 3,
+          buyTime: fullTime[4],
+          sellTime: fullTime[5],
+          BuyDueTime: DueOne,
+          SellDueTime: DueTwo,
+        });
+      } else responses.success = false;
     }
     if (currency[3]) {
-      let coin = currency[3].match(coinRegex)[0];
-      responses.tradeLength++;
-
       var DueOne = generateDueTime(fullTime[6]);
       var DueTwo = generateDueTime(fullTime[7]);
       if (DueOne && DueTwo) {
         responses.success = true;
-      } else responses.success = false;
+        let coin = currency[3].match(coinRegex)[0];
+        responses.tradeLength++;
 
-      responses.trades.push({
-        coin,
-        id: 4,
-        buyTime: fullTime[6],
-        sellTime: fullTime[7],
-        BuyDueTime: DueOne,
-        SellDueTime: DueTwo,
-      });
+        responses.trades.push({
+          coin,
+          id: 4,
+          buyTime: fullTime[6],
+          sellTime: fullTime[7],
+          BuyDueTime: DueOne,
+          SellDueTime: DueTwo,
+        });
+      } else responses.success = false;
     }
 
     console.log(responses);
