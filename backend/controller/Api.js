@@ -37,17 +37,6 @@ const tradeAlarm = async (req, res) => {
     const fullTime = content.match(fullTimeRegex);
     console.log("fullTime", fullTime);
 
-    // भारतीय समय क्षेत्र को सेट करने के लिए
-    var date2 = new Date();
-    var timeZoneOffset = date2.getTimezoneOffset();
-    var ISTOffset = 330; // IST का ऑफसेट (5 घंटे 30 मिनट)
-
-    date2.setMinutes(date2.getMinutes() + timeZoneOffset + ISTOffset);
-
-  return  res.send( date2); // भारतीय समय क्षेत्र के अनुसार अद्यतित समय और तारीख को प्रिंट करेगा
-
-
-
     //const timeZone = "Asia/Kolkata";
     //const currentDate = moment.now(timeZone);
 
@@ -68,10 +57,18 @@ const tradeAlarm = async (req, res) => {
 
       const makedTime = `${hh}:${ss}:00 ${apm} ${dt}`;
 
-      let foundTime = new Date(makedTime);
-      
+      let foundTime2 = new Date(makedTime);
 
-      
+      // भारतीय समय क्षेत्र को सेट करने के लिए
+      var timeZoneOffset = foundTime2.getTimezoneOffset();
+      var ISTOffset = 330; // IST का ऑफसेट (5 घंटे 30 मिनट)
+
+      foundTime2.setMinutes(
+        foundTime2.getMinutes() + timeZoneOffset + ISTOffset
+      );
+
+      const foundTime = new Date(foundTime2);
+
       let timey =
         foundTime.getHours() +
         ":" +
