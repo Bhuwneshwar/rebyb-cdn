@@ -13,7 +13,7 @@ const tradeAlarm = async (req, res) => {
       tradeLength: 0,
       trades: [],
       T1: Date(),
-      T2: new Date(),
+      T2: new Date().getTime() - now * 1000,
     };
     content = content.replace(/ nextLine /g, "\n");
     console.log(content);
@@ -63,9 +63,8 @@ const tradeAlarm = async (req, res) => {
       var timeZoneOffset = foundTime2.getTimezoneOffset();
       var ISTOffset = 330; // IST का ऑफसेट (5 घंटे 30 मिनट)
 
-      foundTime2.setMinutes(
-        foundTime2.getMinutes() + timeZoneOffset + ISTOffset
-      );
+      //foundTime2.setMinutes(
+      console.log("hhgh", foundTime2.getMinutes() + timeZoneOffset + ISTOffset);
 
       console.log(foundTime2);
       const foundTime = new Date(foundTime2.toString().replace("Z", ""));
@@ -79,7 +78,6 @@ const tradeAlarm = async (req, res) => {
 
       console.log("found date", foundTime);
       console.log("timey", timey);
-      responses.T2 = timey;
       const miliDef = foundTime.getTime() - now * 1000;
       console.log("miliDef", miliDef);
 
