@@ -1,9 +1,12 @@
+//const moment = require("moment-timezone");
+
 const tradeAlarm = async (req, res) => {
   try {
     console.log(req.body);
 
     let content = req.body.info;
     let now = req.body.now;
+    let localDate = req.body.localDate;
 
     let responses = {
       success: false,
@@ -33,6 +36,9 @@ const tradeAlarm = async (req, res) => {
     const fullTime = content.match(fullTimeRegex);
     console.log("fullTime", fullTime);
 
+    //const timeZone = "Asia/Kolkata";
+    //const currentDate = moment.now(timeZone);
+
     const generateDueTime = (oneTime) => {
       const twoDigits = oneTime.match(twoDigitRegex);
       const hh = twoDigits[1];
@@ -44,10 +50,7 @@ const tradeAlarm = async (req, res) => {
       const apm = peridium ? peridium[0].toUpperCase() : "";
       console.log("peridium", peridium);
 
-      var currentDate = new Date();
-      var day = currentDate.getDate(); // Returns the day of the month (1-31)
-      var month = currentDate.getMonth() + 1; // Returns the month (0-11), so we add 1
-      var year = currentDate.getFullYear(); // Returns the year (e.g., 2023)
+      var { day, month, year } = localDate; // Returns the day of the month (1-31)
       const dt = month + " " + day + " " + year;
       console.log(dt);
 
