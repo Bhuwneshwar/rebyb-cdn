@@ -67,8 +67,8 @@ const tradeAlarm = async (req, res) => {
       const miliDef = foundTime.getTime() - now * 1000;
       console.log("miliDef", miliDef);
 
-      if (miliDef > 0) {
-        let secondDef = Math.floor(miliDef / 1000) - 65;
+      let secondDef = Math.floor(miliDef / 1000) - 65;
+      if (secondDef > 0) {
         console.log("secondDef", secondDef);
         return secondDef;
       }
