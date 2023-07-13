@@ -12,10 +12,8 @@ const tradeAlarm = async (req, res) => {
       success: false,
       tradeLength: 0,
       trades: [],
-      T1: Date(),
-      T2: new Date().toLocaleString("en-US", {
-        timeZone: "Asia/Calcutta",
-      }),
+       getTimezoneOffset: new Date().getTimezoneOffset,
+       Deft: new Date().getTime() - now*1000 ,
     };
     content = content.replace(/ nextLine /g, "\n");
     console.log(content);
@@ -39,11 +37,13 @@ const tradeAlarm = async (req, res) => {
     const fullTime = content.match(fullTimeRegex);
     console.log("fullTime", fullTime);
 
-    const nDate = new Date().toLocaleString("en-US", {
-      timeZone: "Asia/Calcutta",
-    });
+    // const nDate = new Date().toLocaleString("en-US", {
+    //  timeZone: "Asia/Calcutta",
+    // });
 
-     console.log(nDate);
+    //const milliseconds2 = new Date(nDate).getTime();
+
+    // console.log(milliseconds2);
 
     //const timeZone = "Asia/Kolkata";
     //const currentDate = moment.now(timeZone);
@@ -65,17 +65,17 @@ const tradeAlarm = async (req, res) => {
 
       const makedTime = `${hh}:${ss}:00 ${apm} ${dt}`;
 
-      let foundTime2 = new Date(makedTime);
+      let foundTime = new Date(makedTime);
 
       // भारतीय समय क्षेत्र को सेट करने के लिए
-      var timeZoneOffset = foundTime2.getTimezoneOffset();
-      var ISTOffset = 330; // IST का ऑफसेट (5 घंटे 30 मिनट)
+      // var timeZoneOffset = foundTime2.getTimezoneOffset();
+      // var ISTOffset = 330; // IST का ऑफसेट (5 घंटे 30 मिनट)
 
       //foundTime2.setMinutes(
-      console.log("hhgh", foundTime2.getMinutes() + timeZoneOffset + ISTOffset);
+      // console.log("hhgh", foundTime2.getMinutes() + timeZoneOffset + ISTOffset);
 
-      console.log(foundTime2);
-      const foundTime = new Date(foundTime2.toString().replace("Z", ""));
+      // console.log(foundTime2);
+      // const foundTime = new Date(foundTime2.toString().replace("Z", ""));
 
       let timey =
         foundTime.getHours() +
