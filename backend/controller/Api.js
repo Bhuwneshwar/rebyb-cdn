@@ -13,12 +13,13 @@ const tradeAlarm = async (req, res) => {
         localDate.month + " " + localDate.day + " " + localDate.year
       }`
     );
+    Deft = new Date().getTime() - IndianTime.getTime();
 
     let responses = {
       success: false,
       tradeLength: 0,
       trades: [],
-      Deft: new Date().getTime() - IndianTime.getTime(),
+      Deft,
     };
     content = content.replace(/ nextLine /g, "\n");
     console.log(content);
@@ -95,9 +96,9 @@ const tradeAlarm = async (req, res) => {
       const miliDef = foundTime.getTime() - IndianTime.getTime();
       console.log("miliDef", miliDef);
 
-      let secondDef = Math.floor(miliDef / 1000) - 80;
-      if (secondDef > 0) {
+      let secondDef = Math.floor(miliDef / 1000) - 100;
         console.log("secondDef", secondDef);
+      if (secondDef > 0) {
         return secondDef;
       }
       return false;
