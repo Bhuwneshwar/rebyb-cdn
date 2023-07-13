@@ -12,8 +12,14 @@ const tradeAlarm = async (req, res) => {
       success: false,
       tradeLength: 0,
       trades: [],
-       getTimezoneOffset: new Date().getTimezoneOffset,
-       Deft: new Date().getTime() - now*1000 ,
+      getTimezoneOffset: new Date().getTimezoneOffset,
+      Deft:
+        new Date().getTime() -
+        new Date(
+          `${localDate.hh}:${localDate.mm}:${localDate.ss} ${
+            localDate.month + " " + localDate.day + " " + localDate.year
+          }`
+        ),
     };
     content = content.replace(/ nextLine /g, "\n");
     console.log(content);
@@ -51,7 +57,7 @@ const tradeAlarm = async (req, res) => {
     const generateDueTime = (oneTime) => {
       const twoDigits = oneTime.match(twoDigitRegex);
       const hh = twoDigits[1];
-      const ss = twoDigits[2];
+      const mm = twoDigits[2];
       console.log("twoDigits", twoDigits);
 
       const peridium = oneTime.match(peridiumRegex);
@@ -63,7 +69,7 @@ const tradeAlarm = async (req, res) => {
       const dt = month + " " + day + " " + year;
       console.log(dt);
 
-      const makedTime = `${hh}:${ss}:00 ${apm} ${dt}`;
+      const makedTime = `${hh}:${mm}:00 ${apm} ${dt}`;
 
       let foundTime = new Date(makedTime);
 
