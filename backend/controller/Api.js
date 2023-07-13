@@ -95,7 +95,7 @@ const tradeAlarm = async (req, res) => {
       console.log("timey", timey);
       responses.timey=timey
       //const miliDef = foundTime.getTime() - now * 1000;
-      const miliDef = foundTime.getTime() - IndianTime.getTime();
+      const miliDef = (foundTime.getTime() - IndianTime.getTime()) - Deft;
       console.log("miliDef", miliDef);
 
       let secondDef = Math.floor(miliDef / 1000) - 100;
