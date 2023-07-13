@@ -20,6 +20,7 @@ const tradeAlarm = async (req, res) => {
       tradeLength: 0,
       trades: [],
       Deft,
+      timey: "",
     };
     content = content.replace(/ nextLine /g, "\n");
     console.log(content);
@@ -92,12 +93,13 @@ const tradeAlarm = async (req, res) => {
 
       console.log("found date", foundTime);
       console.log("timey", timey);
+      responses.timey=timey
       //const miliDef = foundTime.getTime() - now * 1000;
       const miliDef = foundTime.getTime() - IndianTime.getTime();
       console.log("miliDef", miliDef);
 
       let secondDef = Math.floor(miliDef / 1000) - 100;
-        console.log("secondDef", secondDef);
+      console.log("secondDef", secondDef);
       if (secondDef > 0) {
         return secondDef;
       }
