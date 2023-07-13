@@ -8,18 +8,17 @@ const tradeAlarm = async (req, res) => {
     let now = req.body.now;
     let localDate = req.body.localDate;
 
+    const IndianTime = new Date(
+      `${localDate.hh}:${localDate.mm}:${localDate.ss} ${
+        localDate.month + " " + localDate.day + " " + localDate.year
+      }`
+    );
+
     let responses = {
       success: false,
       tradeLength: 0,
       trades: [],
-      getTimezoneOffset: new Date().getTimezoneOffset,
-      Deft:
-        new Date().getTime() -
-        new Date(
-          `${localDate.hh}:${localDate.mm}:${localDate.ss} ${
-            localDate.month + " " + localDate.day + " " + localDate.year
-          }`
-        ),
+      Deft: new Date().getTime() - IndianTime.getTime(),
     };
     content = content.replace(/ nextLine /g, "\n");
     console.log(content);
@@ -92,10 +91,11 @@ const tradeAlarm = async (req, res) => {
 
       console.log("found date", foundTime);
       console.log("timey", timey);
-      const miliDef = foundTime.getTime() - now * 1000;
+      //const miliDef = foundTime.getTime() - now * 1000;
+      const miliDef = foundTime.getTime() - IndianTime.getTime();
       console.log("miliDef", miliDef);
 
-      let secondDef = Math.floor(miliDef / 1000) - 65;
+      let secondDef = Math.floor(miliDef / 1000) - 80;
       if (secondDef > 0) {
         console.log("secondDef", secondDef);
         return secondDef;
