@@ -15,12 +15,7 @@ app.get("/", (req, res) => {
 const api = require("./routes/Api");
 app.use("/api", api);
 
-const port = process.env.PORT || 5005;
-
-var DueOne = setInterval(() =>{
-  console.log("setInterval started") 
-
-}, 5000)
+const port = process.env.PORT ||5003 
 
 
 app.listen(port, (s) => {
