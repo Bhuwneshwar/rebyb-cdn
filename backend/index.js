@@ -17,6 +17,12 @@ app.use("/api", api);
 
 const port = process.env.PORT || 5005;
 
+var DueOne = setInterval(() =>{
+  console.log("setInterval started") 
+
+}, 5000)
+
+
 app.listen(port, (s) => {
   console.log("server started on http://localhost:" + port);
 });
